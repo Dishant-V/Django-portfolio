@@ -8,4 +8,4 @@ services:
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DJANGO_ALLOWED_HOSTS
-        value: portfolio_site.onrender.com
+        value: dishants-portfolio-ykm5.onrender.com
