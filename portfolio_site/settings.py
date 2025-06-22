@@ -23,7 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-secret')
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS','https://dishants-portfolio-ykm5.onrender.com','127.0.0.1,localhost').split(',') 
+ALLOWED_HOSTS = os.environ.get(
+    'DJANGO_ALLOWED_HOSTS',
+    'dishants-portfolio-ykm5.onrender.com,127.0.0.1,localhost'
+).split(',')
+
 #ALLOWED_HOSTS: Use comma-separated hosts from an environment variable (like portfolio-site.onrender.com), but default to localhost for development.
 
 
@@ -134,9 +138,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-# Add templates directory support
-from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-DEBUG = True  # For development
