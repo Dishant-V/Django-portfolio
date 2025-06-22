@@ -19,3 +19,6 @@ db.sqlite3
 # Migrations (optional)
 */migrations/*.pyc
 */migrations/__pycache__/
+
+__pycache__/
+*.py[cod]
