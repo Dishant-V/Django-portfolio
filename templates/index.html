@@ -533,48 +533,51 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
+   <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                mobileMenu.classList.remove('active');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
             });
+            mobileMenu.classList.remove('active');
         });
+    });
 
-        // Theme toggle
-        const toggleSwitch = document.querySelector('.toggle-input');
-        const currentTheme = localStorage.getItem('theme');
-        
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-            if (currentTheme === 'dark-mode') {
-                toggleSwitch.checked = true;
-            }
-        }
+    // Theme toggle — support both desktop and mobile
+    const toggleSwitches = document.querySelectorAll('.toggle-input');
+    const currentTheme = localStorage.getItem('theme');
 
-        function switchTheme(e) {
+    if (currentTheme === 'dark-mode') {
+        document.body.classList.add('dark-mode');
+        toggleSwitches.forEach(input => input.checked = true);
+    }
+
+    toggleSwitches.forEach(switchEl => {
+        switchEl.addEventListener('change', function (e) {
             if (e.target.checked) {
                 document.body.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark-mode');
             } else {
                 document.body.classList.remove('dark-mode');
                 localStorage.setItem('theme', '');
-            }    
-        }
+            }
+            // Sync all toggles
+            toggleSwitches.forEach(input => {
+                if (input !== e.target) input.checked = e.target.checked;
+            });
+        });
+    });
+</script>
 
-        toggleSwitch.addEventListener('change', switchTheme);
-    </script>
 </body>
 </html>
